@@ -80,10 +80,10 @@ theme_mode:  # [dark|light]
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn: 'https://cdn.jsdelivr.net/gh/yzngo/picture/img'
+img_cdn: 'https://cdn.jsdelivr.net/gh/yzngo/ImageHosting/img'
 
 # the avatar on sidebar, support local or CORS resources
-avatar: '/202204171116969.jpeg'
+avatar: '/202302050214614.jpeg'
 
 # boolean type, the global switch for ToC in posts.
 toc: true
@@ -188,10 +188,10 @@ exclude:
   - package*.json
 
 jekyll-archives:
-  enabled: [categories, tags]
+  # enabled: [categories, tags]
   layouts:
-    category: category
-    tag: tag
+    # category: category
+    # tag: tag
   permalinks:
-    tag: /tags/:name/
-    category: /categories/:name/
+    # tag: /tags/:name/
+    # category: /categories/:name/
