@@ -23,7 +23,7 @@ timezone: Asia/Shanghai
 
 title: Yzngo                          # the main title
 
-tagline: Unity3D Developer   # it will display as the sub-title
+tagline: Game is Awesome!   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   About Unity3D, Games Engine, and Graphics.
