@@ -1,0 +1,639 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="generator" content="Jekyll v4.2.2" /><meta property="og:title" content="Dotween" /><meta property="og:locale" content="en" /><meta name="description" content="About Unity3D, Games Engine, and Graphics." /><meta property="og:description" content="About Unity3D, Games Engine, and Graphics." /><link rel="canonical" href="http://yzngo.cc/posts/Dotween/" /><meta property="og:url" content="http://yzngo.cc/posts/Dotween/" /><meta property="og:site_name" content="Yzngo" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2020-11-23T00:00:00+08:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Dotween" /><meta name="twitter:site" content="@twitter_username" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2020-11-23T00:00:00+08:00","datePublished":"2020-11-23T00:00:00+08:00","description":"About Unity3D, Games Engine, and Graphics.","headline":"Dotween","mainEntityOfPage":{"@type":"WebPage","@id":"http://yzngo.cc/posts/Dotween/"},"url":"http://yzngo.cc/posts/Dotween/"}</script><title>Dotween | Yzngo</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="Yzngo"><meta name="application-name" content="Yzngo"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get MODE_ATTR() { return "data-mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } static get ID() { return "mode-toggle"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener("change", () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage({ direction: ModeToggle.ID, message: this.modeStatus }, "*"); } } /* ModeToggle */ const toggle = new ModeToggle(); function flipMode() { if (toggle.hasMode) { if (toggle.isSysDarkPrefer) { if (toggle.isLightMode) { toggle.clearMode(); } else { toggle.setLight(); } } else { if (toggle.isDarkMode) { toggle.clearMode(); } else { toggle.setDark(); } } } else { if (toggle.isSysDarkPrefer) { toggle.setLight(); } else { toggle.setDark(); } } toggle.notify(); } /* flipMode() */ </script><body data-spy="scroll" data-target="#toc" data-topbar-visible="true"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" class="mx-auto"> <img src="https://cdn.jsdelivr.net/gh/yzngo/ImageHosting/img/202302050214614.jpeg" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">Yzngo</a></div><div class="site-subtitle font-italic">Game is Awesome!</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href=" javascript:location.href = 'mailto:' + ['yzngo','live.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" > <i class="fas fa-rss"></i> </a></div></div><div id="topbar-wrapper" class="row justify-content-center"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Home </a> </span> <span>Dotween</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..."> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>Dotween</h1><div class="post-meta text-muted"><div> By <em> <a href="https://yzngo.cc">Yzngo</a> </em></div><div class="d-flex"><div> <span> Posted <em class="timeago" data-ts="1606060800" data-toggle="tooltip" data-placement="bottom" data-tooltip-df="llll" > 2020-11-23 </em> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="3056 words"> <em>16 min</em> read</span></div></div></div><div class="post-content"><p><a href="http://dotween.demigiant.com/documentation.php">官方文档</a></p><p><a href="https://easings.net/cn">缓动函数图例</a></p><p>Dotween的大多数Tween函数以拓展方法的形式提供。</p><h2 id="basic-settings"><span class="mr-2">Basic Settings</span><a href="#basic-settings" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+</pre><td class="rouge-code"><pre>
+
+<span class="c1">// 使用TweenParams</span>
+<span class="n">TweenParams</span> <span class="n">para</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">TweenParams</span><span class="p">();</span>
+<span class="n">para</span><span class="p">.</span><span class="nf">SetLoops</span><span class="p">(-</span><span class="m">1</span><span class="p">,</span> <span class="n">LoopType</span><span class="p">.</span><span class="n">Yoyo</span><span class="p">);</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOMove</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">one</span><span class="p">,</span> <span class="m">2</span><span class="p">).</span><span class="nf">SetAs</span><span class="p">(</span><span class="n">para</span><span class="p">);</span>
+
+
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOMove</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span>       	<span class="c1">// 动画：目标值/偏移值 + 时长/速度</span>
+<span class="c1">// 基本配置</span>
+    <span class="p">.</span><span class="nf">SetSpeedBased</span><span class="p">()</span>					<span class="c1">// 动画基于速度而不是时长</span>
+    <span class="p">.</span><span class="nf">From</span><span class="p">()</span>							<span class="c1">// 目标位置设为初始位置</span>
+    <span class="p">.</span><span class="nf">SetRelative</span><span class="p">()</span>					<span class="c1">// 增量运动, true=偏移量, falese=目标值</span>
+    <span class="p">.</span><span class="nf">SetDelay</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>						<span class="c1">// 设置延时	  </span>
+    <span class="p">.</span><span class="nf">SetId</span><span class="p">(</span><span class="s">"Id"</span><span class="p">)</span>						<span class="c1">// 设置动画ID</span>
+
+    <span class="p">.</span><span class="nf">SetLoops</span><span class="p">(-</span><span class="m">1</span><span class="p">,</span> <span class="n">LoopType</span><span class="p">.</span><span class="n">Yoyo</span><span class="p">)</span>		<span class="c1">// 设置循环次数和类型(重新开始，Yoyo，累加)</span>
+    <span class="p">.</span><span class="nf">SetUpdate</span><span class="p">(</span><span class="n">UpdateType</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span> <span class="k">true</span><span class="p">)</span>  <span class="c1">// 设置动画的帧函数, 第二个参数 TRUE = ignoreTimeScale</span>
+    
+    <span class="p">.</span><span class="nf">SetRecyclable</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>				<span class="c1">// 设置是否可回收</span>
+    							<span class="c1">// 为true的话，动画播放完会被回收，缓存下来，不然播完就直接销毁</span>
+    <span class="p">.</span><span class="nf">SetAutoKill</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>				<span class="c1">// 非无限循环的动画是否自动destroy；</span>
+    							<span class="c1">// 若非无限循环的动画为false，停止后可以Restart(),否则不可以</span>
+    <span class="p">.</span><span class="nf">Pause</span><span class="p">()</span>							<span class="c1">// 创建时处于暂停状态</span>
+
+<span class="c1">// Ease曲线</span>
+	<span class="p">.</span><span class="nf">SetEase</span><span class="p">(</span><span class="n">Ease</span><span class="p">.</span><span class="n">Linear</span><span class="p">)</span>				<span class="c1">// 默认Ease曲线</span>
+	<span class="p">.</span><span class="nf">SetEase</span><span class="p">(</span><span class="n">AnimationCurve</span><span class="p">)</span>			 <span class="c1">// 使用AnimationCurve当作参数</span>
+	<span class="p">.</span><span class="nf">SetEase</span><span class="p">(</span><span class="n">MyEaseFun</span><span class="p">)</span>				<span class="c1">// 自定义, 以回调函数为参数</span>
+              
+<span class="c1">// 回调函数</span>
+	<span class="p">.</span><span class="nf">OnComplete</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">})</span>				<span class="c1">// 动画完成回调</span>
+	<span class="p">.</span><span class="nf">OnStepComplete</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{})</span>			<span class="c1">// 完成单个循环周期时触发</span>
+	<span class="p">.</span><span class="nf">OnKill</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">})</span>					<span class="c1">// 动画销毁时回调</span>
+    
+    <span class="p">.</span><span class="nf">OnStart</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">})</span>					<span class="c1">// 只在第一次播放动画时调用，在play之前调用</span>
+	<span class="p">.</span><span class="nf">OnPlay</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">})</span>					<span class="c1">// 动画播放时回调,暂停后重新播放也会调用</span>
+	<span class="p">.</span><span class="nf">OnPause</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">})</span>					<span class="c1">// 动画暂停时回调</span>
+    <span class="p">.</span><span class="nf">OnRewind</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">})</span>				<span class="c1">// 动画回退时回调, 以下情况会被调用</span>
+        									<span class="c1">// 使用DORestart重新播放时</span>
+        									<span class="c1">// 使用Rewind倒播动画完成时</span>
+        									<span class="c1">// 使用DOFlip翻转动画完成时</span>
+        									<span class="c1">// 使用DOPlayBackwards反向播放动画完成时</span>
+    <span class="p">.</span><span class="nf">OnUpdate</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">})</span>				<span class="c1">// 帧回调</span>
+    <span class="p">.</span><span class="nf">OnWaypointChange</span><span class="p">((</span><span class="k">value</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="p">})</span>	 <span class="c1">// 在路径动画时，改变目标点时的回调，参数为当前目标点的下标</span>
+<span class="p">);</span>
+
+<span class="c1">//返回值是运动距离的百分比 值应为0~1之间，最后的值需为1,不然停留的位置不会是目标位置</span>
+<span class="k">private</span> <span class="kt">float</span> <span class="nf">MyEaseFun</span><span class="p">(</span><span class="kt">float</span> <span class="n">time</span><span class="p">,</span> <span class="kt">float</span> <span class="n">duration</span><span class="p">,</span> <span class="kt">float</span> <span class="n">overshootOrAmplitude</span><span class="p">,</span> <span class="kt">float</span> <span class="n">period</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">time</span> <span class="p">/</span> <span class="n">duration</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// </span>
+<span class="c1">// Demo</span>
+<span class="k">using</span> <span class="nn">DG.Tweening</span><span class="p">;</span> <span class="c1">//引入命名空间</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">DOTWeenTest</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="n">Tweener</span> <span class="n">twe</span><span class="p">;</span> <span class="c1">//声明一个Tweener对象</span>
+    <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+    <span class="p">{</span> 
+        <span class="n">twe</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">DOMove</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="m">2</span><span class="p">);</span><span class="c1">//将动画保存在Tweener对象中 </span>
+        <span class="n">twe</span><span class="p">.</span><span class="nf">Pause</span><span class="p">();</span><span class="c1">//暂停,防止自动播放  </span>
+        <span class="n">twe</span><span class="p">.</span><span class="nf">SetAutoKill</span><span class="p">(</span><span class="k">false</span><span class="p">);</span><span class="c1">//关闭动画自动销毁  </span>
+    <span class="p">}</span>
+    <span class="c1">//创建两个方法事件,控制前放后倒放</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Forward</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">twe</span><span class="p">.</span><span class="nf">PlayForward</span><span class="p">();</span> <span class="c1">//该动画正放</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Back</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">twe</span><span class="p">.</span><span class="nf">PlayBackwards</span><span class="p">();</span> <span class="c1">//该动画倒放</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+</pre></table></code></div></div><h2 id="controlling"><span class="mr-2">Controlling</span><a href="#controlling" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre><td class="rouge-code"><pre><span class="c1">// 一共有三种方式控制tween动画, 所有三种方式共享相同的方法名，只是扩展方法形式增加了 DO 前缀</span>
+
+<span class="c1">// 1. 通过DOTween类的静态函数控制</span>
+<span class="n">DOTween</span><span class="p">.</span><span class="nf">PauseAll</span><span class="p">();</span>				<span class="c1">// All version</span>
+<span class="n">DOTween</span><span class="p">.</span><span class="nf">Pause</span><span class="p">(</span><span class="s">"badoom"</span><span class="p">);</span>		<span class="c1">// Id version</span>
+<span class="n">DOTween</span><span class="p">.</span><span class="nf">Pause</span><span class="p">(</span><span class="n">transform</span><span class="p">);</span>		<span class="c1">// target version</span>
+<span class="c1">// 2. 直接通过tween动画控制</span>
+<span class="n">myTween</span><span class="p">.</span><span class="nf">Pause</span><span class="p">();</span>
+<span class="c1">// 3. 扩展方法形式</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOPause</span><span class="p">();</span>
+
+
+<span class="c1">// 如果想在动画结束之后使用这些方法，一定要disable掉 AutoKill</span>
+
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOPlay</span><span class="p">();</span>				<span class="c1">// 播放，播放的动画不能是正在播放的，也不能是播放完成的</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOPause</span><span class="p">();</span>			<span class="c1">// 暂停此组件上的所有动画</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DORestart</span><span class="p">();</span>			<span class="c1">// 重播</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DORewind</span><span class="p">();</span>			<span class="c1">// 倒播，此方法会直接退回起始点</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOSmoothRewind</span><span class="p">();</span>		<span class="c1">// 平滑倒播，此方法会按照之前的运动方式从当前位置退回起始点	</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOKill</span><span class="p">();</span>				<span class="c1">// 销魂此组件上的所有动画</span>
+
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOFlip</span><span class="p">();</span>				<span class="c1">// 翻转补间的方向</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOGoto</span><span class="p">(</span><span class="m">1.5f</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>	<span class="c1">// 跳转, (跳转的时间点，跳转后是否播放动画)</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOPlayBackwards</span><span class="p">();</span>	<span class="c1">// 反向播放动画</span>
+			<span class="c1">// 在动画播放到一半时执行，会退回起始点，在一开始执行看不到效果是因为，物体本身就在起始点</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOPlayForward</span><span class="p">();</span>		<span class="c1">// 正向播放动画</span>
+<span class="n">transfomr</span><span class="p">.</span><span class="nf">TogglePause</span><span class="p">();</span>		<span class="c1">// 当暂停时，执行就继续播放，播放时，执行就暂停</span>
+</pre></table></code></div></div><h2 id="get-tween-data"><span class="mr-2">Get Tween Data</span><a href="#get-tween-data" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre><td class="rouge-code"><pre><span class="c1">// DOTween类的静态方法</span>
+<span class="n">DOTween</span><span class="p">.</span><span class="nf">PausedTweens</span><span class="p">();</span>				<span class="c1">// 返回所有暂停的动画，没有则返回null</span>
+<span class="n">DOTween</span><span class="p">.</span><span class="nf">PlayingTweens</span><span class="p">();</span>			<span class="c1">// 返回所有真正播放的动画，没有则返回null</span>
+<span class="n">DOTween</span><span class="p">.</span><span class="nf">TweensById</span><span class="p">(</span><span class="s">"id"</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>		<span class="c1">// 返回对应ID的动画数组，第二个参数表示是否只收集正在播放的动画</span>
+<span class="n">DOTween</span><span class="p">.</span><span class="nf">TweensByTarget</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>	<span class="c1">// 返回给定对象的数组</span>
+<span class="n">DOTween</span><span class="p">.</span><span class="nf">IsTweening</span><span class="p">(</span><span class="n">transform</span><span class="p">);</span>		<span class="c1">// 收集传入的对象是否有动画在活动</span>
+<span class="n">DOTween</span><span class="p">.</span><span class="nf">TotalPlayingTweens</span><span class="p">();</span>		<span class="c1">// 正在播放的动画的总数，目前处于延迟播放状态的动画也算</span>
+
+<span class="c1">// 动画实例的方法</span>
+<span class="n">tweener</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">DOMove</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">one</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>
+
+<span class="n">tweener</span><span class="p">.</span><span class="n">fullPosition</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>		<span class="c1">// 表示动画执行位置的属性，可读可写</span>
+<span class="n">tweener</span><span class="p">.</span><span class="nf">CompletedLoops</span><span class="p">();</span>		<span class="c1">// 表示动画执行完的次数</span>
+<span class="n">tweener</span><span class="p">.</span><span class="nf">Delay</span><span class="p">();</span>				<span class="c1">// 获取动画的延迟时间</span>
+<span class="n">tweener</span><span class="p">.</span><span class="nf">Duration</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>		<span class="c1">// 获取动画的持续时间, 参数为true 表示计算循环的时间，无限循环为Infinity</span>
+<span class="n">tweener</span><span class="p">.</span><span class="nf">Elapsed</span><span class="p">();</span>				<span class="c1">// 动画已播放的时间,  参数为true 表示计算循环的时间</span>
+<span class="n">tweener</span><span class="p">.</span><span class="nf">ElapsedDirectionalPercentage</span><span class="p">();</span> 	<span class="c1">// 返回动画进度的百分比, [0~1]</span>
+<span class="n">tweener</span><span class="p">.</span><span class="nf">ElapsedPercentage</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>		<span class="c1">// 返回动画区间已用的百分比, true=返回值是循环总区间的已用百分比</span>
+<span class="n">tweener</span><span class="p">.</span><span class="nf">IsActive</span><span class="p">();</span>			<span class="c1">// 动画是否在活动</span>
+<span class="n">tweener</span><span class="p">.</span><span class="nf">IsBackwards</span><span class="p">();</span>				<span class="c1">// 是否是反向动画</span>
+<span class="n">tweener</span><span class="p">.</span><span class="nf">IsComplete</span><span class="p">();</span>			<span class="c1">// 动画是否完成</span>
+<span class="n">tweener</span><span class="p">.</span><span class="nf">IsInitialized</span><span class="p">();</span>		<span class="c1">// 是否已经初始化</span>
+<span class="n">tweener</span><span class="p">.</span><span class="nf">IsPlaying</span><span class="p">();</span>			<span class="c1">// 是否正在播放</span>
+<span class="n">tweener</span><span class="p">.</span><span class="nf">Loops</span><span class="p">();</span>				<span class="c1">// 返回循环次数，无限循环为Infinity</span>
+</pre></table></code></div></div><h2 id="waitfor-coroutines--tasks"><span class="mr-2">WaitFor Coroutines / Tasks</span><a href="#waitfor-coroutines--tasks" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre><td class="rouge-code"><pre><span class="k">private</span> <span class="n">IEnumerator</span> <span class="nf">PlayAnimation</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">tweener</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">DOMove</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">one</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>
+       
+	<span class="k">yield</span> <span class="k">return</span> <span class="n">tweener</span><span class="p">.</span><span class="nf">WaitForCompletion</span><span class="p">();</span>	<span class="c1">// 等待动画执行完</span>
+
+	<span class="k">yield</span> <span class="k">return</span> <span class="n">tweener</span><span class="p">.</span><span class="nf">WaitForElapsedLoops</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>	<span class="c1">// 等待指定的循环次数</span>
+        
+	<span class="k">yield</span> <span class="k">return</span> <span class="n">tweener</span><span class="p">.</span><span class="nf">WaitForKill</span><span class="p">();</span>		<span class="c1">// 等待动画被杀死</span>
+        
+	<span class="k">yield</span> <span class="k">return</span> <span class="n">tweener</span><span class="p">.</span><span class="nf">WaitForPosition</span><span class="p">(</span><span class="m">0.5f</span><span class="p">);</span>	<span class="c1">// 等待动画执行指定时间</span>
+        
+    <span class="c1">// 等待动画回退, 以下情况会继续执行函数</span>
+        <span class="c1">// 使用DORestart重新播放时</span>
+        <span class="c1">// 使用Rewind倒播动画完成时</span>
+        <span class="c1">// 使用DOFlip翻转动画完成时</span>
+        <span class="c1">// 使用DOPlayBackwards反向播放动画完成时</span>
+	<span class="k">yield</span> <span class="k">return</span> <span class="n">tweener</span><span class="p">.</span><span class="nf">WaitForRewind</span><span class="p">();</span>
+
+	<span class="k">yield</span> <span class="k">return</span> <span class="n">tweener</span><span class="p">.</span><span class="nf">WaitForStart</span><span class="p">();</span>	<span class="c1">// 等待Start执行后继续执行</span>
+<span class="p">}</span>
+
+<span class="k">private</span> <span class="k">async</span> <span class="n">Task</span> <span class="nf">PlayAnimation</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">myTween</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">DOMove</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">one</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>
+    <span class="k">await</span> <span class="n">myTween</span><span class="p">.</span><span class="nf">AsyncWaitForCompletion</span><span class="p">();</span>	
+    <span class="k">await</span> <span class="n">myTween</span><span class="p">.</span><span class="nf">AsyncWaitForElapsedLoops</span><span class="p">();</span>
+    <span class="k">await</span> <span class="n">myTween</span><span class="p">.</span><span class="nf">AsyncWaitForKill</span><span class="p">();</span>
+    <span class="k">await</span> <span class="n">myTween</span><span class="p">.</span><span class="nf">AsyncWaitForPosition</span><span class="p">(</span><span class="m">0.3f</span><span class="p">);</span>
+    <span class="k">await</span> <span class="n">myTween</span><span class="p">.</span><span class="nf">AsyncWaitForRewind</span><span class="p">();</span>
+    <span class="k">await</span> <span class="n">myTween</span><span class="p">.</span><span class="nf">AsyncWaitForStart</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="tweener---any-value"><span class="mr-2">Tweener - Any Value</span><a href="#tweener---any-value" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="kt">int</span> <span class="n">timer</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+<span class="n">DOTween</span><span class="p">.</span><span class="nf">To</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">timer</span><span class="p">,</span> <span class="n">x</span> <span class="p">=&gt;</span> <span class="n">timer</span> <span class="p">=</span> <span class="n">x</span><span class="p">,</span> <span class="m">0.2f</span><span class="p">,</span> <span class="n">animDuration</span><span class="p">);</span>
+</pre></table></code></div></div><h2 id="tweener---transform"><span class="mr-2">Tweener - Transform</span><a href="#tweener---transform" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre><td class="rouge-code"><pre>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOMove</span><span class="p">();</span>			<span class="c1">// 世界坐标移动</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOLocalMove</span><span class="p">();</span>	<span class="c1">// 局部坐标移动</span>
+
+<span class="n">transform</span><span class="p">.</span><span class="nf">DORotate</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="m">2</span><span class="p">);</span>	<span class="c1">// 旋转到给定的值，改变的是欧拉角</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DORotateQuaternion</span><span class="p">(</span><span class="k">new</span> <span class="nf">Quaternion</span><span class="p">(</span><span class="m">0.1f</span><span class="p">,</span> <span class="m">0.1f</span><span class="p">,</span> <span class="m">0.1f</span><span class="p">,</span> <span class="m">0.1f</span><span class="p">),</span> <span class="m">2</span><span class="p">);</span> <span class="c1">// 旋转到给定的值，改变四元数</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOLocalRotate</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="m">2</span><span class="p">);</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOLocalRotateQuaternion</span><span class="p">(</span><span class="k">new</span> <span class="nf">Quaternion</span><span class="p">(</span><span class="m">0.1f</span><span class="p">,</span> <span class="m">0.1f</span><span class="p">,</span> <span class="m">0.1f</span><span class="p">,</span> <span class="m">0.1f</span><span class="p">),</span> <span class="m">2</span><span class="p">);</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOLookAt</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="m">2</span><span class="p">);</span>	<span class="c1">// 平滑的让自身的z轴正方向指向目标点</span>
+
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOScale</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="m">2</span><span class="p">);</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOScaleX</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>
+
+<span class="c1">// 冲击</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOPunchPosition</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="n">duration</span><span class="p">,</span> <span class="n">vibrato</span><span class="p">,</span> <span class="n">elascity</span><span class="p">);</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOPunchRotation</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">0.1f</span><span class="p">);</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOPunchScale</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">0.1f</span><span class="p">);</span>
+
+<span class="c1">// 震动</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOShakePosition</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOShakeRotation</span><span class="p">(</span><span class="m">3</span><span class="p">);</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOShakeScale</span><span class="p">(</span><span class="m">3</span><span class="p">);</span>
+
+<span class="c1">// 混合动画</span>
+
+<span class="c1">// 原本同时执行两个Move方法，只会执行最新的一个动画命令</span>
+<span class="c1">// 假设起始点为(0,0,0)，结果是物体运动到了（2,2,2）</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOMove</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="m">2</span><span class="p">);</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOMove</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span> <span class="m">2</span><span class="p">);</span>
+
+
+<span class="c1">// DOBlendableMoveBy允许多个同时执行, 且它是增量动画，参数不是目标点，而是要移动的量</span>
+<span class="c1">// 假设起始点为(1,1,1)，最后动画停止时的坐标是(1,2,2)</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOBlendableMoveBy</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="m">1</span><span class="p">);</span>
+<span class="n">transform</span><span class="p">.</span><span class="nf">DOBlendableMoveBy</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(-</span><span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="m">1</span><span class="p">);</span>  
+
+</pre></table></code></div></div><h2 id="tweener---ugui"><span class="mr-2">Tweener - uGUI</span><a href="#tweener---ugui" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre>
+<span class="c1">// RectTransform</span>
+<span class="n">trans</span><span class="p">.</span><span class="nf">DOAnchorPos</span><span class="p">()</span>
+   
+<span class="c1">// Image</span>
+<span class="n">image</span><span class="p">.</span><span class="nf">DOFade</span><span class="p">(</span><span class="n">endValue</span><span class="p">,</span> <span class="n">duration</span><span class="p">).</span><span class="nf">SetAutoKill</span><span class="p">(</span><span class="k">false</span><span class="p">).</span><span class="nf">Pause</span><span class="p">();</span>	<span class="c1">// 渐变</span>
+<span class="n">image</span><span class="p">.</span><span class="nf">DOColor</span><span class="p">(</span><span class="n">endValue</span><span class="p">,</span> <span class="n">duration</span><span class="p">).</span><span class="nf">SetEase</span><span class="p">(</span><span class="n">Ease</span><span class="p">.</span><span class="n">Linear</span><span class="p">).</span><span class="nf">Pause</span><span class="p">();</span>	<span class="c1">// 颜色</span>
+<span class="n">image</span><span class="p">.</span><span class="nf">DOFillAmount</span><span class="p">(</span><span class="n">endValue</span><span class="p">,</span> <span class="n">duration</span><span class="p">).</span><span class="nf">SetEase</span><span class="p">(</span><span class="n">Ease</span><span class="p">.</span><span class="n">Linear</span><span class="p">).</span><span class="nf">SetLoops</span><span class="p">(-</span><span class="m">1</span><span class="p">,</span> <span class="n">LoopType</span><span class="p">.</span><span class="n">Yoyo</span><span class="p">)</span>   <span class="c1">//填充</span>
+    <span class="p">.</span><span class="nf">OnStepComplete</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+		<span class="n">image</span><span class="p">.</span><span class="n">fillClockwise</span> <span class="p">=</span> <span class="p">!</span><span class="n">image</span><span class="p">.</span><span class="n">fillClockwise</span><span class="p">;</span>
+    <span class="p">}).</span><span class="nf">Pause</span><span class="p">();</span>
+
+<span class="c1">// Text   通过动画把现有text变成value值。（Replace, Add, Scramble）</span>
+<span class="n">text</span><span class="p">.</span><span class="nf">DOText</span><span class="p">(</span><span class="s">"This text will replace the existing one"</span><span class="p">,</span> <span class="n">duration</span><span class="p">).</span><span class="nf">Pause</span><span class="p">();</span>		<span class="c1">// 替换</span>
+<span class="n">text</span><span class="p">.</span><span class="nf">DOText</span><span class="p">(</span><span class="s">"This text will be added to the existing one"</span><span class="p">,</span> <span class="n">duration</span><span class="p">).</span><span class="nf">Pause</span><span class="p">();</span>  	<span class="c1">// 追加</span>
+<span class="n">text</span><span class="p">.</span><span class="nf">DOText</span><span class="p">(</span><span class="s">"This text will appear from scrambled chars"</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="k">true</span><span class="p">,</span> <span class="n">ScrambleMode</span><span class="p">.</span><span class="n">All</span><span class="p">);</span> <span class="c1">// 乱码</span>
+
+<span class="c1">// Slider</span>
+<span class="n">slider</span><span class="p">.</span><span class="nf">DOValue</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">duration</span><span class="p">);</span>			<span class="c1">// 滑动条的值</span>
+</pre></table></code></div></div><h2 id="tweener---materials"><span class="mr-2">Tweener - Materials</span><a href="#tweener---materials" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="n">Material</span> <span class="n">material</span><span class="p">;</span>
+<span class="n">material</span><span class="p">.</span><span class="nf">DOColor</span><span class="p">(</span><span class="n">toColor</span><span class="p">,</span> <span class="n">duration</span><span class="p">);</span>						<span class="c1">// 材质颜色</span>
+<span class="n">material</span><span class="p">.</span><span class="nf">DOColor</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="n">clear</span><span class="p">,</span> <span class="s">"_Color"</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>					<span class="c1">// 按照shader的属性名，修改颜色</span>
+<span class="n">material</span><span class="p">.</span><span class="nf">DOColor</span><span class="p">(</span><span class="n">toColor</span><span class="p">,</span> <span class="s">"_EmissionColor"</span><span class="p">,</span> <span class="n">duration</span><span class="p">);</span>		<span class="c1">// 发光</span>
+<span class="n">material</span><span class="p">.</span><span class="nf">DOFade</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>						<span class="c1">// 修改alpha值</span>
+<span class="n">material</span><span class="p">.</span><span class="nf">DOGradientColor</span><span class="p">(</span><span class="n">Gradient</span><span class="p">,</span> <span class="s">"_Color"</span><span class="p">,</span> <span class="m">3</span><span class="p">);</span>		<span class="c1">// 颜色渐变</span>
+<span class="n">material</span><span class="p">.</span><span class="nf">DOOffset</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector2</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="m">2</span><span class="p">);</span>				<span class="c1">// 改变材质offset的值</span>
+<span class="n">material</span><span class="p">.</span><span class="nf">DOVector</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector4</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="s">"_Color"</span><span class="p">,</span> <span class="m">3</span><span class="p">);</span>	<span class="c1">// 改变shader属性的名称对应的Vector4值</span>
+<span class="n">material</span><span class="p">.</span><span class="nf">DOBlendableColor</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="n">red</span><span class="p">,</span> <span class="s">"_Color"</span><span class="p">,</span> <span class="m">3</span><span class="p">);</span> 		<span class="c1">// 颜色混合</span>
+</pre></table></code></div></div><h2 id="tweener---camera"><span class="mr-2">Tweener - Camera</span><a href="#tweener---camera" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="n">camera</span><span class="p">.</span><span class="nf">DOAspect</span><span class="p">(</span><span class="m">0.6f</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>					<span class="c1">// 屏幕视角的宽高比</span>
+<span class="n">camera</span><span class="p">.</span><span class="nf">DOColor</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="n">blue</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>		<span class="c1">// 改变相机background参数的颜色</span>
+<span class="n">camera</span><span class="p">.</span><span class="nf">DONearClipPlane</span><span class="p">(</span><span class="m">200</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>		<span class="c1">// 改变相机近切面的值</span>
+<span class="n">camera</span><span class="p">.</span><span class="nf">DOFarClipPlane</span><span class="p">(</span><span class="m">2000</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>		<span class="c1">// 改变相机远切面的值</span>
+<span class="n">camera</span><span class="p">.</span><span class="nf">DOFieldOfView</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span>		<span class="c1">// 改变相机FOV的值</span>
+<span class="n">camera</span><span class="p">.</span><span class="nf">DOOrthoSize</span><span class="p">(</span><span class="n">endValue</span><span class="p">,</span> <span class="n">duration</span><span class="p">);</span>	<span class="c1">// 改变相机正交大小</span>
+<span class="n">camera</span><span class="p">.</span><span class="nf">DOPixelRect</span><span class="p">(</span><span class="k">new</span> <span class="nf">Rect</span><span class="p">(</span><span class="m">0f</span><span class="p">,</span> <span class="m">0f</span><span class="p">,</span> <span class="m">600f</span><span class="p">,</span> <span class="m">500f</span><span class="p">),</span> <span class="m">2</span><span class="p">);</span>		<span class="c1">// 按照屏幕像素计算的显示范围</span>
+<span class="n">camera</span><span class="p">.</span><span class="nf">DORect</span><span class="p">(</span><span class="k">new</span> <span class="nf">Rect</span><span class="p">(</span><span class="m">0.5f</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">),</span> <span class="m">2</span><span class="p">);</span>			<span class="c1">// 按照屏幕百分比计算的显示范围</span>
+<span class="n">camera</span><span class="p">.</span><span class="nf">DOShakePosition</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">50</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>		<span class="c1">// 相机震动</span>
+</pre></table></code></div></div><h2 id="sequence"><span class="mr-2">Sequence</span><a href="#sequence" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="n">DOTween</span><span class="p">.</span><span class="nf">Sequence</span><span class="p">()</span>		<span class="c1">// 返回一个新的Sequence</span>
+    <span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="n">nestedTween</span><span class="p">)</span>		<span class="c1">// 添加动画到队列中</span>
+    <span class="p">.</span><span class="nf">AppendInterval</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>		<span class="c1">// 添加时间间隔</span>
+    <span class="p">.</span><span class="nf">Insert</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">nestedTween</span><span class="p">)</span>			<span class="c1">// 按时间点插入动画, 第一个参数为时间</span>
+    <span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="n">nestedTween</span><span class="p">)</span>		<span class="c1">// 加入的动画和当前正在执行的动画一起执行</span>
+    
+    <span class="p">.</span><span class="nf">PrependCallback</span><span class="p">(</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{}</span> <span class="p">)</span>	<span class="c1">// 前置回调， 在Sequence的最开始添加回调</span>
+    <span class="p">.</span><span class="nf">InsertCallback</span><span class="p">(</span><span class="m">3.0f</span><span class="p">,</span> <span class="n">InsertCallBack</span><span class="p">)</span>	<span class="c1">// 按时间点插入回调函数</span>
+    <span class="p">.</span><span class="nf">AppendCallback</span><span class="p">(</span><span class="n">CallBack</span><span class="p">);</span>		<span class="c1">// 添加回调到动画中</span>
+
+
+<span class="n">Sequence</span> <span class="n">s</span> <span class="p">=</span> <span class="n">DOTween</span><span class="p">.</span><span class="nf">Sequence</span><span class="p">();</span>
+<span class="c1">// 添加动画到队列中</span>
+<span class="n">s</span><span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="n">cube</span><span class="p">.</span><span class="nf">DOMoveX</span><span class="p">(</span><span class="m">6</span><span class="p">,</span> <span class="n">duration</span><span class="p">).</span><span class="nf">SetRelative</span><span class="p">().</span><span class="nf">SetEase</span><span class="p">(</span><span class="n">Ease</span><span class="p">.</span><span class="n">InOutQuad</span><span class="p">));</span>
+<span class="c1">// 按时间点插入动画</span>
+<span class="n">s</span><span class="p">.</span><span class="nf">Insert</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">cube</span><span class="p">.</span><span class="nf">DORotate</span><span class="p">(</span><span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="n">duration</span> <span class="p">/</span> <span class="m">2</span><span class="p">).</span><span class="nf">SetEase</span><span class="p">(</span><span class="n">Ease</span><span class="p">.</span><span class="n">InQuad</span><span class="p">).</span><span class="nf">SetLoops</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">LoopType</span><span class="p">.</span><span class="n">Yoyo</span><span class="p">));</span>
+<span class="n">s</span><span class="p">.</span><span class="nf">Insert</span><span class="p">(</span><span class="n">duration</span> <span class="p">/</span> <span class="m">2</span><span class="p">,</span> <span class="n">cube</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">Renderer</span><span class="p">&gt;().</span><span class="n">material</span><span class="p">.</span><span class="nf">DOColor</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="n">yellow</span><span class="p">,</span> <span class="n">duration</span> <span class="p">/</span> <span class="m">2</span><span class="p">));</span>
+<span class="c1">// Set the whole Sequence to loop infinitely forward and backwards</span>
+<span class="n">s</span><span class="p">.</span><span class="nf">SetLoops</span><span class="p">(-</span><span class="m">1</span><span class="p">,</span> <span class="n">LoopType</span><span class="p">.</span><span class="n">Yoyo</span><span class="p">);</span>
+</pre></table></code></div></div><h2 id="paths"><span class="mr-2">Paths</span><a href="#paths" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre><td class="rouge-code"><pre><span class="k">public</span> <span class="n">Transform</span> <span class="n">target</span><span class="p">;</span>
+<span class="k">public</span> <span class="n">PathType</span> <span class="n">pathType</span> <span class="p">=</span> <span class="n">PathType</span><span class="p">.</span><span class="n">CatmullRom</span><span class="p">;</span>
+<span class="k">public</span> <span class="n">Vector3</span><span class="p">[]</span> <span class="n">waypoints</span> <span class="p">=</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span>
+	<span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">6</span><span class="p">),</span>
+	<span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">8</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="m">14</span><span class="p">),</span>
+	<span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="m">14</span><span class="p">),</span>
+	<span class="k">new</span> <span class="nf">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">6</span><span class="p">,</span> <span class="m">6</span><span class="p">),</span>
+	<span class="k">new</span> <span class="nf">Vector3</span><span class="p">(-</span><span class="m">3</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+<span class="p">};</span>
+
+<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="c1">// Create a path tween using the given pathType, Linear or CatmullRom (curved).</span>
+	<span class="c1">// Use SetOptions to close the path</span>
+	<span class="c1">// and SetLookAt to make the target orient to the path itself</span>
+	<span class="n">Tween</span> <span class="n">t</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="nf">DOPath</span><span class="p">(</span><span class="n">waypoints</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="n">pathType</span><span class="p">)</span>
+		<span class="p">.</span><span class="nf">SetOptions</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+		<span class="p">.</span><span class="nf">SetLookAt</span><span class="p">(</span><span class="m">0.001f</span><span class="p">);</span>
+	<span class="c1">// Then set the ease to Linear and use infinite loops</span>
+	<span class="n">t</span><span class="p">.</span><span class="nf">SetEase</span><span class="p">(</span><span class="n">Ease</span><span class="p">.</span><span class="n">Linear</span><span class="p">).</span><span class="nf">SetLoops</span><span class="p">(-</span><span class="m">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="c1">// DoTween Path Component</span>
+
+</pre></table></code></div></div><h2 id="follow"><span class="mr-2">Follow</span><a href="#follow" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre><td class="rouge-code"><pre><span class="k">public</span> <span class="n">Transform</span> <span class="n">target</span><span class="p">;</span> <span class="c1">// Target to follow</span>
+<span class="n">Vector3</span> <span class="n">targetLastPos</span><span class="p">;</span>
+<span class="n">Tweener</span> <span class="n">tween</span><span class="p">;</span>
+
+<span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="c1">// First create the "move to target" tween and store it as a Tweener.</span>
+	<span class="c1">// In this case I'm also setting autoKill to FALSE so the tween can go on forever</span>
+	<span class="c1">// (otherwise it will stop executing if it reaches the target)</span>
+	<span class="n">tween</span> <span class="p">=</span> <span class="n">transform</span><span class="p">.</span><span class="nf">DOMove</span><span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="m">2</span><span class="p">).</span><span class="nf">SetAutoKill</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+	<span class="c1">// Store the target's last position, so it can be used to know if it changes</span>
+	<span class="c1">// (to prevent changing the tween if nothing actually changes)</span>
+	<span class="n">targetLastPos</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="nf">Update</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="c1">// Use an Update routine to change the tween's endValue each frame</span>
+	<span class="c1">// so that it updates to the target's position if that changed</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">targetLastPos</span> <span class="p">==</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+	<span class="c1">// Add a Restart in the end, so that if the tween was completed it will play again</span>
+	<span class="n">tween</span><span class="p">.</span><span class="nf">ChangeEndValue</span><span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">position</span><span class="p">,</span> <span class="k">true</span><span class="p">).</span><span class="nf">Restart</span><span class="p">();</span>
+	<span class="n">targetLastPos</span> <span class="p">=</span> <span class="n">target</span><span class="p">.</span><span class="n">position</span><span class="p">;</span>
+<span class="p">}</span>
+
+</pre></table></code></div></div><h2 id="dotween-animation-component"><span class="mr-2">Dotween Animation Component</span><a href="#dotween-animation-component" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><ol><li><p>制作与设计</p><ul><li>不想直接播放，就不要选中 AutoPlay<li>如果非无限循环的动画如果以后想要重复播放，就不要选中 AutoKil</ul><li><p>代码控制</p><div class="language-c# highlighter-rouge"><div class="code-header"> <span data-label-text="C#"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre>	
+ <span class="c1">// 根据ID控制动画</span>
+ <span class="c1">// 播放</span>
+ <span class="n">DOTween</span><span class="p">.</span><span class="nf">Restart</span><span class="p">(</span><span class="s">"id"</span><span class="p">);</span>
+ <span class="c1">// 停止</span>
+ <span class="n">DOTween</span><span class="p">.</span><span class="nf">Complete</span><span class="p">(</span><span class="s">"id"</span><span class="p">);</span>
+	
+ <span class="c1">// 控制单个 DOTweenAnimation 组件</span>
+ <span class="p">[</span><span class="n">SerializeField</span><span class="p">]</span> <span class="k">private</span> <span class="n">DOTweenAnimation</span> <span class="n">bg</span><span class="p">;</span>
+ <span class="n">bg</span><span class="p">.</span><span class="nf">DORestart</span><span class="p">();</span>
+ <span class="n">bg</span><span class="p">.</span><span class="nf">DOPlayNext</span><span class="p">();</span>		<span class="c1">// 播放下一个Tween Animation</span>
+ <span class="n">bg</span><span class="p">.</span><span class="nf">DOPlayById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>		<span class="c1">// 播放指定ID的动画</span>
+ <span class="n">bg</span><span class="p">.</span><span class="nf">DOPlayAllById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>	
+ <span class="n">bg</span><span class="p">.</span><span class="nf">DORestartById</span><span class="p">();</span>
+ <span class="n">bg</span><span class="p">.</span><span class="nf">DORestartAllByID</span><span class="p">();</span>
+</pre></table></code></div></div></ol><h2 id="常见问题"><span class="mr-2">常见问题</span><a href="#常见问题" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><ol><li><p>想要复用动画，不能调用Play()，需要调用Restart()方法</p><p>调用play方法，这个动画 <strong>不能是正在播放的，也不能是播放完成的，</strong></p><p>Restart方法成功调用必须保证 AutoKill = false</p><li><p>原本同时执行两个Move方法，只会执行最新的一个动画命令</p><p>DOBlendableMoveBy允许多个同时执行, 且它是增量动画，参数不是目标点，而是要移动的量</p></ol></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=Dotween+-+Yzngo&url=http%3A%2F%2Fyzngo.cc%2Fposts%2FDotween%2F" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=Dotween+-+Yzngo&u=http%3A%2F%2Fyzngo.cc%2Fposts%2FDotween%2F" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://t.me/share/url?url=http%3A%2F%2Fyzngo.cc%2Fposts%2FDotween%2F&text=Dotween+-+Yzngo" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="Copy link" data-title-succeed="Link copied successfully!"> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted"><div class="access"></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"><div class="panel-heading pl-3 pt-2 mb-2">Contents</div><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="tail-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/"><div class="card-body"> <em class="timeago small" data-ts="1672848000" > 2023-01-05 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>软件架构</h3><div class="text-muted small"><p> 软件架构 项目中的每个子系统都有自己的方向，把子系统的决策方向合起来再加入它们之间的关联调用就构成了一个完整的架构，即每个系统、模块、组件都是软件系统架构中的一部分。 架构图 在架构设计中，为了能够更好的整理，思考，描述，表达我们的想法；为了让自己和大家能够更加系统的认识架构的意图，结构以及各个子系统。 架构图不关心实现的细节，只关心整体的解决方案。架构图要做到从宏观...</p></div></div></a></div><div class="card"> <a href="/posts/Unity-Job-System/"><div class="card-body"> <em class="timeago small" data-ts="1668182400" > 2022-11-12 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Unity Job System</h3><div class="text-muted small"><p> 官方文档 blit 和 blittable type 是什么？ blit 是位块传送的意思。内存拷贝操作（memory copy operation）有时候被称作位块传送（block transfer），简称为 bit blit。专用于 block transfer 的硬件被称作位块传送器（blitter）。 能够使用 block transfer 的类型在C#中被称作 bl...</p></div></div></a></div><div class="card"> <a href="/posts/UniTask/"><div class="card-body"> <em class="timeago small" data-ts="1666627200" > 2022-10-25 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Unitask</h3><div class="text-muted small"><p> UniTask/README_CN.md UniTask v2 — Zero Allocation async/await for Unity, with Asynchronous LINQ UniTask 为Unity提供一个高性能，0 GC 的 async/await 异步方案。 基于值类型的 UniTask&amp;lt;T&amp;gt; 和自定义的 AsyncMethodBuild...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/CSharp-LINQ/" class="btn btn-outline-primary" prompt="Older"><p>Csharp Linq</p></a> <a href="/posts/%E5%AE%9A%E7%82%B9%E6%95%B0/" class="btn btn-outline-primary" prompt="Newer"><p>定点数</p></a></div></div></div></div><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center text-muted"><div class="footer-left"><p class="mb-0"> © 2024 <a href="https://yzngo.cc">Yzngo</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/lozad/dist/lozad.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/dayjs@1/dayjs.min.js,npm/dayjs@1/locale/en.min.js,npm/dayjs@1/plugin/relativeTime.min.js,npm/dayjs@1/plugin/localizedFormat.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.bundle.min.js"></script> <script defer src="/app.js"></script>
